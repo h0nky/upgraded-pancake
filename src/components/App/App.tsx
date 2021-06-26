@@ -6,7 +6,7 @@ import './index.scss';
 const App: FC = (): ReactElement => (
   <Provider>
     <div className="app">
-      <header className="app-header" />
+      {/* <header className="app-header" /> */}
       <Context.Consumer>
         {(context: any) => <MainPage {...context} />}
       </Context.Consumer>

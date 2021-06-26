@@ -19,5 +19,23 @@ export type TResponse = {
 
 export interface IModalWindow {
   children: ReactElement,
-  onClose: () => void,
+  onClose: (id?: any) => void,
+};
+
+export interface ICompaniesListItemProps {
+  id: number,
+  name: string,
+  rating: number,
+  handleClick: (id?: any) => {}
+};
+
+// TODO: change undefined
+export interface IModalContent {
+  description?: string,
+  developer?: number,
+  found_date?: number,
+  headquarter?: string,
+  name?: string,
+  technologies?: string,
+  tm_rating?: number,
 };
