@@ -39,3 +39,8 @@ export interface IModalContent {
   technologies?: string,
   tm_rating?: number,
 };
+
+export interface ISearchBox {
+  value: string,
+  handleChange: (value: string) => void
+};

@@ -1,0 +1,15 @@
+.search-box__container {
+  display: flex;
+  max-width: 312px;
+}
+
+.search-box__input {
+    border: 2px solid #282c34;
+    border-radius: 8px;
+    color: #000;
+    height: 32px;
+    padding: 6px 48px;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-size: 20px;
+}

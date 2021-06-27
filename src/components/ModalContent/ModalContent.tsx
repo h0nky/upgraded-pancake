@@ -13,13 +13,28 @@ const ModalContent: FC<IModalContent> = ({
 }): ReactElement => {
   return (
     <div className="modal-content">
-      <div>{name}</div>
-      <div>{description}</div>
-      <div>{developer}</div>
-      <div>{found_date}</div>
-      <div>{headquarter}</div>
-      <div>{technologies}</div>
-      <div>{tm_rating}</div>
+      <h1 className="modal-content__header">{name}</h1>
+      <h3>{headquarter}</h3>
+      <div className="modal-content__text">
+        <p>Found in:</p>
+        <span>{found_date}</span>
+      </div>
+      <div className="modal-content__text">
+        <p>Employees:</p>
+        <span>{developer}</span>
+      </div>
+      <div className="modal-content__text">
+        <p>Technologies:</p>
+        <span>{technologies}</span>
+      </div>
+      <div className="modal-content__text">
+        <p>Rating:</p>
+        <span>{tm_rating}</span>
+      </div>
+      <div className="modal-content__summary">
+        <p>Company description:</p>
+        <span>{description}</span>
+      </div>
     </div>
   );
 };
