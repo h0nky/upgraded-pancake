@@ -6,6 +6,8 @@ const CompaniesListItem: FC<ICompaniesListItemProps> = ({
   id,
   name,
   rating,
+  headquarter,
+  employees,
   handleClick
 }): ReactElement => {
   const ref = useRef<any>(null);
@@ -18,7 +20,9 @@ const CompaniesListItem: FC<ICompaniesListItemProps> = ({
     >
       <div>{id}</div>
       <div>{name}</div>
+      <div>{headquarter}</div>
       <div>{rating}</div>
+      <div>{employees}</div>
     </li>
   );
 }

@@ -36,6 +36,7 @@ const ModalWindow: FC<IModalWindow> = ({ children, onClose }): ReactElement => {
 
   return createPortal(
     <div className="modal">
+      <span className="modal__close-button"onClick={onClose} />
       {children}
     </div>,
     elRef.current,

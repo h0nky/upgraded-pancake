@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .modal {
     background-color: rgba(0,0,0,0.5);
     position: fixed;
@@ -8,4 +10,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .modal__close-button::before {
+      content: 'x';
+      color: $color-primary4;
+      font-weight: 600;
+      font-size: 50px;
+      cursor: pointer;
+      position: absolute;
+      top: 70px;
+      left: 60px;
+    }
   }

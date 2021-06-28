@@ -1,1 +1,15 @@
-.companies-list {}
+.companies-list {
+  .companies-list__head {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    li {
+      &:not(:first-child) {
+        flex-basis: 20%;
+      }
+    }
+  }
+  .companies-list__body {
+    list-style: none;
+  }
+}

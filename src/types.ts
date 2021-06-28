@@ -26,7 +26,9 @@ export interface ICompaniesListItemProps {
   id: number,
   name: string,
   rating: number,
-  handleClick: (id?: any) => {}
+  headquarter: string,
+  employees: number,
+  handleClick: (id?: any) => void
 };
 
 // TODO: change undefined
