@@ -1,0 +1,6 @@
+@import '../../variables.scss';
+
+input {
+  @include input-general;
+  margin: 8px;
+}

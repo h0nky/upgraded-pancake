@@ -5,6 +5,7 @@ import ModalContent from "../ModalContent";
 import SearchBox from "../SearchBox";
 import { useGet } from "restful-react";
 import { IModalContent, TCompany } from "../../types";
+import UserForm from "../UserForm";
 import './index.scss';
 
 
@@ -13,10 +14,10 @@ const MainPage: FC = (): ReactElement => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [selectedCompany, setSelectedCompany] = useState<IModalContent>();
 
-  const { data } = useGet({ path: '/companies' });
+  const { data, loading } = useGet({ path: '/companies' });
 
   const getSelectedCompany = useCallback((id: number): void => {
-    const searchable = data?.filter((item: any) => item.id === id);
+    const searchable = data?.filter((item: TCompany) => item.id === id);
     setSelectedCompany(searchable[0]);
   },[data]);
 
@@ -29,6 +30,7 @@ const MainPage: FC = (): ReactElement => {
     setSearchValue(value);
   },[]);
 
+  if (loading) return <p>Loading...</p> // TODO: Move to separate file
   return (
     <div className="main-page">
       <SearchBox
@@ -41,7 +43,9 @@ const MainPage: FC = (): ReactElement => {
       />
       {modalState && (
         <ModalWindow onClose={toggleModalWindow}>
-          <ModalContent {...selectedCompany} />
+          <ModalContent {...selectedCompany}>
+            <UserForm />
+          </ModalContent>
         </ModalWindow>)}
     </div>
   );

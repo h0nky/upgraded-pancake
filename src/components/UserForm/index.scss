@@ -1,0 +1,17 @@
+@import '../../variables.scss';
+
+.user-form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .user-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  button {
+    height: 32px;
+    width: 124px;
+    border-radius: 8px;
+  }
+}

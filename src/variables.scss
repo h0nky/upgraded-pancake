@@ -13,3 +13,14 @@ $color-secondary5: #1e6486;
 $color-secondary6: #9d54a1;
 $color-secondary7: #c94040;
 $color-secondary8: #64c3a0;
+
+//// MIXINS
+@mixin input-general {
+  border: 2px solid $color-primary1;
+  border-radius: 8px;
+  color: $color-primary1;;
+  height: 24px;
+  padding: 6px 48px;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}

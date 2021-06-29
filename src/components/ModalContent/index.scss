@@ -2,14 +2,13 @@
 
 .modal-content {
   width: 468px;
-  background-color: $color-primary4;
+  background-color: white;
   padding: 24px;
   border-radius: 6px;
   .modal-content__header {
     text-align: center;
     font-family: 'Lato';
   }
-  .modal-content__summary {}
   .modal-content__text {
     display: flex;
     align-items: center;
