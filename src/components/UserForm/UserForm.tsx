@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { FC, ReactElement } from "react";
 import CustomInput from "../CustomInput";
+import { useMutate } from "restful-react";
+import { IModalContent } from "../../types";
 import './index.scss';
 
 
-const UserForm: FC = (): ReactElement => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+const UserForm: FC<{ company: IModalContent | undefined }> = ({ company }): ReactElement => {
+  const [userName, setName] = useState('');
+  const [userEmail, setEmail] = useState('');
+  // const [error, setError] = useState('');
 
-  const onFormSubmit = () => {};
+  const { mutate: postData } = useMutate({ verb: 'POST', path: '/talentInterest' });
+
+  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!(userName.length && userEmail.length)) return;
+
+    postData({
+      id: company?.id,
+      email: userEmail,
+      name: userName,
+      company
+    });
+  };
   
   return (
     <div className="user-form__container">
@@ -17,19 +33,19 @@ const UserForm: FC = (): ReactElement => {
         <CustomInput
           inputName="userName"
           type="text"
-          value={name}
+          value={userName}
           placeholder="Enter your name"
-          onHandleChange={(e: any) => setName(e.target.value)}
+          onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setName(e.target.value)}
         />
         <CustomInput
           inputName="userEmail"
           type="text"
-          value={email}
+          value={userEmail}
           placeholder="Enter your email"
-          onHandleChange={(e: any) => setEmail(e.target.value)}
+          onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setEmail(e.target.value)}
         />
+        <button type="submit">Submit</button>
       </form>
-      <button onClick={() => {}}>Submit</button>
     </div>
   );
 }

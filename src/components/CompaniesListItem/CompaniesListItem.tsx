@@ -10,12 +10,18 @@ const CompaniesListItem: FC<ICompaniesListItemProps> = ({
   employees,
   handleClick
 }): ReactElement => {
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLLIElement>(null);
+
+  const onHandleItemClick = () => {
+    const idFromRef = ref.current && Number(ref.current.id);
+    handleClick(idFromRef);
+  };
+
   return (
     <li
-      id={String(id)}
       ref={ref}
-      onClick={() => handleClick(+ref.current.id)}
+      id={String(id)}
+      onClick={onHandleItemClick}
       className="companies-list__item"
     >
       <div>{id}</div>

@@ -3,11 +3,12 @@ import CompaniesListItem from "../CompaniesListItem";
 import { TCompany } from "../../types";
 import "./index.scss";
 
+// List titles TODO: Move to separate file!
 const TITLES = ['ID', 'COMPANY NAME', 'HEADQUARTER', 'RATING', 'EMPLOYEES'];
 
 const CompaniesList: FC<{
   companies: TCompany[],
-  handleClick: (id: any) => any
+  handleClick: (id: number) => void
 }> = ({
   companies,
   handleClick

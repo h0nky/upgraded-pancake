@@ -44,7 +44,7 @@ const MainPage: FC = (): ReactElement => {
       {modalState && (
         <ModalWindow onClose={toggleModalWindow}>
           <ModalContent {...selectedCompany}>
-            <UserForm />
+            <UserForm company={selectedCompany} />
           </ModalContent>
         </ModalWindow>)}
     </div>

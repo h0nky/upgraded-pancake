@@ -40,6 +40,7 @@ export interface IModalContent {
   name?: string,
   technologies?: string,
   tm_rating?: number,
+  id?: number,
 };
 
 export interface ISearchBox {

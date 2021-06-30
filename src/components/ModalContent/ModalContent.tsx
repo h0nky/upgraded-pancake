@@ -10,7 +10,7 @@ const ModalContent: FC<IModalContent> = ({
   name,
   technologies,
   tm_rating,
-  children
+  children,
 }): ReactElement => {
   return (
     <div className="modal-content">
