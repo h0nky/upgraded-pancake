@@ -26,6 +26,7 @@ const UserForm: FC<{ company: IModalContent | undefined }> = ({ company }): Reac
     }
 
     const response = await postAsyncData(company, userName, userEmail);
+    
     setExtraInfo(response);
     setError(false);
   };

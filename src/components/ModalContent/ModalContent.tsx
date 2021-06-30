@@ -1,6 +1,8 @@
 import { FC, ReactElement } from "react";
+import DummyChart from "../DummyChart";
 import { IModalContent } from "../../types";
 import './index.scss';
+
 
 const ModalContent: FC<IModalContent> = ({
   description,
@@ -36,6 +38,7 @@ const ModalContent: FC<IModalContent> = ({
         <p>Company description:</p>
         <span>{description}</span>
       </div>
+      <DummyChart />
       {children}
     </div>
   );
