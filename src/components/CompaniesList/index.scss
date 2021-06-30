@@ -1,19 +1,15 @@
 @import "../../variables.scss";
 
 .companies-list {
-  .companies-list__head {
+  .companies-list__heading {
     display: flex;
     justify-content: space-between;
-    list-style: none;
-    border-bottom: 1px solid black;
-    padding: 16px 32px;
+    font-weight: fontWeightBold;
+    font-size: $fontSizeL;
     li {
       &:not(:first-child) {
-        flex-basis: 20%;
+        flex-basis: 21%;
       }
     }
-  }
-  .companies-list__body {
-    list-style: none;
   }
 }

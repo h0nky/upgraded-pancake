@@ -1,11 +1,13 @@
-import { ReactElement, useCallback, useState, FC } from "react";
+import { FC, ReactElement, useMemo, useCallback, useState, ChangeEvent } from "react";
 import CompaniesList from "../CompaniesList";
 import ModalWindow from "../ModalWindow";
 import ModalContent from "../ModalContent";
-import SearchBox from "../SearchBox";
+import CustomInput from "../CustomInput";
+import UserForm from "../UserForm";
+
 import { useGet } from "restful-react";
 import { IModalContent, TCompany } from "../../types";
-import UserForm from "../UserForm";
+import { LOADING_TEXT } from "../../constants";
 import './index.scss';
 
 
@@ -14,7 +16,7 @@ const MainPage: FC = (): ReactElement => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [selectedCompany, setSelectedCompany] = useState<IModalContent>();
 
-  const { data, loading } = useGet({ path: '/companies' });
+  const { data, loading, error } = useGet({ path: '/companies' });
 
   const getSelectedCompany = useCallback((id: number): void => {
     const searchable = data?.filter((item: TCompany) => item.id === id);
@@ -26,19 +28,24 @@ const MainPage: FC = (): ReactElement => {
     setModalState(!modalState);
   },[getSelectedCompany, modalState]);
 
-  const onCompanySearch = useCallback((value) => {
-    setSearchValue(value);
-  },[]);
+  const filterCompanies = useMemo(() => {
+    const filtered = data?.filter((company: TCompany) => company.name.includes(searchValue));
+    return filtered;
+  },[data, searchValue]);
 
-  if (loading) return <p>Loading...</p> // TODO: Move to separate file
+  if (error) return <p className="main-page__loading">{LOADING_TEXT}</p> // TODO HANDLE ERROR
+  if (loading) return <p className="main-page__loading">{LOADING_TEXT}</p>
+
   return (
     <div className="main-page">
-      <SearchBox
+      <CustomInput
+        type="text"
         value={searchValue}
-        handleChange={onCompanySearch}
+        placeholder="Search"
+        onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setSearchValue(e.target.value)}
       />
       <CompaniesList
-        companies={data?.filter((company: TCompany) => company.name.includes(searchValue))}
+        companies={filterCompanies}
         handleClick={toggleModalWindow}
       />
       {modalState && (

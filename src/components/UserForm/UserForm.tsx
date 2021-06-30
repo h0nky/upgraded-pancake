@@ -1,49 +1,52 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { FC, ReactElement } from "react";
 import CustomInput from "../CustomInput";
-import { useMutate } from "restful-react";
-import { IModalContent } from "../../types";
+import { validateEmail } from "../../utils/utils";
+import useTalentInterest from "../../hooks/useTalentInterest";
+import { IModalContent, TExtraInfo} from "../../types";
+import { FORM_VALIDATION_ERROR, USER_FORM_TITLE } from "../../constants";
 import './index.scss';
 
 
 const UserForm: FC<{ company: IModalContent | undefined }> = ({ company }): ReactElement => {
-  const [userName, setName] = useState('');
-  const [userEmail, setEmail] = useState('');
-  // const [error, setError] = useState('');
+  const [userName, setName] = useState<string>('');
+  const [userEmail, setEmail] = useState<string>('');
+  const [error, setError] = useState<string|boolean>(false);
+  const [extraInfo, setExtraInfo] = useState<TExtraInfo>({ code: 0, type: '', message: '' });
+  
+  const postAsyncData = useTalentInterest();
 
-  const { mutate: postData } = useMutate({ verb: 'POST', path: '/talentInterest' });
-
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!(userName.length && userEmail.length)) return;
+    // User input check before form submit
+    if (!(userName.length && userEmail.length) && !validateEmail(userEmail)) {
+      setError(FORM_VALIDATION_ERROR);
+      return;
+    }
 
-    postData({
-      id: company?.id,
-      email: userEmail,
-      name: userName,
-      company
-    });
+    const response = await postAsyncData(company, userName, userEmail);
+    setExtraInfo(response);
+    setError(false);
   };
   
   return (
     <div className="user-form__container">
-      <h4>Want to know more about company? Fill in the form below!</h4>
+      <h4>{USER_FORM_TITLE}</h4>
       <form className="user-form" onSubmit={onFormSubmit}>
         <CustomInput
-          inputName="userName"
           type="text"
           value={userName}
-          placeholder="Enter your name"
+          placeholder="Name"
           onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setName(e.target.value)}
-        />
+          />
         <CustomInput
-          inputName="userEmail"
           type="text"
           value={userEmail}
-          placeholder="Enter your email"
+          placeholder="Email"
           onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setEmail(e.target.value)}
         />
+        {error && (<span className="user-form__validation-error">{error}</span>)}
         <button type="submit">Submit</button>
       </form>
     </div>

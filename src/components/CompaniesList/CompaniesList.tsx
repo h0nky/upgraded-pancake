@@ -1,23 +1,22 @@
-import { FC, ReactElement } from "react";
+import { FC, memo, ReactElement } from "react";
 import CompaniesListItem from "../CompaniesListItem";
-import { TCompany } from "../../types";
+import { LIST_TITLES } from "../../constants";
+import { TCompany, ICompaniesListProps } from "../../types";
 import "./index.scss";
 
-// List titles TODO: Move to separate file!
-const TITLES = ['ID', 'COMPANY NAME', 'HEADQUARTER', 'RATING', 'EMPLOYEES'];
 
-const CompaniesList: FC<{
-  companies: TCompany[],
-  handleClick: (id: number) => void
-}> = ({
+const CompaniesList: FC<ICompaniesListProps> = memo(({
   companies,
   handleClick
 }): ReactElement => (
   <div className="companies-list">
-    <ul className="companies-list__head">
-      {TITLES.map((title, index) => <li key={index}>{title}</li>)}
+    <ul className="companies-list__heading">
+    {LIST_TITLES.map((title, index) => (
+      <li key={index}>
+        <span>{title}</span>
+      </li>))}
     </ul>
-    <ul className="companies-list__body">
+    <ul>
       {companies?.map((company: TCompany, index: number) =>
         <CompaniesListItem
           key={company.id}
@@ -30,6 +29,6 @@ const CompaniesList: FC<{
         />)}
     </ul>
   </div>
-);
+));
 
 export default CompaniesList; 

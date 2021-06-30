@@ -1,8 +1,8 @@
-import { useRef, FC, ReactElement } from "react";
+import { useRef, FC, ReactElement, memo } from "react";
 import { ICompaniesListItemProps } from "../../types";
 import "./index.scss";
 
-const CompaniesListItem: FC<ICompaniesListItemProps> = ({
+const CompaniesListItem: FC<ICompaniesListItemProps> = memo(({
   id,
   name,
   rating,
@@ -13,7 +13,7 @@ const CompaniesListItem: FC<ICompaniesListItemProps> = ({
   const ref = useRef<HTMLLIElement>(null);
 
   const onHandleItemClick = () => {
-    const idFromRef = ref.current && Number(ref.current.id);
+    const idFromRef: number | null = ref.current && Number(ref.current.id);
     handleClick(idFromRef);
   };
 
@@ -24,13 +24,13 @@ const CompaniesListItem: FC<ICompaniesListItemProps> = ({
       onClick={onHandleItemClick}
       className="companies-list__item"
     >
-      <div>{id}</div>
-      <div>{name}</div>
-      <div>{headquarter}</div>
-      <div>{rating}</div>
-      <div>{employees}</div>
+      <span>{id}</span>
+      <span>{name}</span>
+      <span>{headquarter}</span>
+      <span>{rating}</span>
+      <span>{employees}</span>
     </li>
   );
-}
+});
 
 export default CompaniesListItem;

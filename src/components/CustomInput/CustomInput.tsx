@@ -1,21 +1,20 @@
 import { FC, ReactElement } from "react";
 import './index.scss';
 
-const CustomInput: FC<{
-  inputName: string,
+interface ICustomInputProps {
   type: string,
   value: string,
   placeholder: string,
   onHandleChange: any
-}> = ({
-  inputName,
+};
+
+const CustomInput: FC<ICustomInputProps> = ({
   type,
   value,
   placeholder,
   onHandleChange
 }): ReactElement => (
   <input
-    name={inputName}
     type={type}
     value={value}
     placeholder={placeholder}

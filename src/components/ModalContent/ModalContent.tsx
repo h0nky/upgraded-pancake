@@ -14,7 +14,7 @@ const ModalContent: FC<IModalContent> = ({
 }): ReactElement => {
   return (
     <div className="modal-content">
-      <h1 className="modal-content__header">{name}</h1>
+      <h2 className="modal-content__header">{name}</h2>
       <h3>{headquarter}</h3>
       <div className="modal-content__text">
         <p>Found in:</p>

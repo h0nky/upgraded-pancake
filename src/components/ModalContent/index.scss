@@ -4,16 +4,18 @@
   width: 468px;
   background-color: white;
   padding: 24px;
-  border-radius: 6px;
+  border-radius: $borderRadiusMain;
   .modal-content__header {
     text-align: center;
-    font-family: 'Lato';
   }
   .modal-content__text {
     display: flex;
     align-items: center;
-    p {
-      margin-right: 8px;
-    }
+
+  }
+  p {
+    margin-right: 8px;
+    font-weight: $fontWeightBold;
+    font-size: $fontSizeM;
   }
 }

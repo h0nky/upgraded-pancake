@@ -7,11 +7,19 @@
   .user-form {
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    align-items: center;
+    position: relative;
+    .user-form__validation-error {
+      position: absolute;
+      color: $color-primary2;
+      font-size: $fontSizeS;
+      top: -15px;
+    }
   }
   button {
     height: 32px;
-    width: 124px;
+    width: 100%;
     border-radius: 8px;
+    margin: 16px 8px 0;
   }
 }

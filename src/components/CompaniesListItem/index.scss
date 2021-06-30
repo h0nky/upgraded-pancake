@@ -5,9 +5,14 @@
   justify-content: space-between;
   padding: 16px 0;
   cursor: pointer;
-  div {
+  font-size: $fontSizeM;
+  border-radius: $borderRadiusMain;
+  span {
     &:not(:first-child) {
       flex-basis: 20%;
     }
   }
+}
+.companies-list__item:hover {
+  background-color: $color-primary4;
 }

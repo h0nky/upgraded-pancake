@@ -1,9 +1,0 @@
-@import '../../variables.scss';
-
-.search-box__container {
-  display: flex;
-  max-width: 300px;
-  input {
-    @include input-general;
-  }
-}

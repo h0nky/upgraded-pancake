@@ -43,7 +43,13 @@ export interface IModalContent {
   id?: number,
 };
 
-export interface ISearchBox {
-  value: string,
-  handleChange: (value: string) => void
+export type TExtraInfo = {
+  code: number,
+  type: string,
+  message: string
+};
+
+export interface ICompaniesListProps {
+  companies: TCompany[],
+  handleClick: (id: number) => void
 };

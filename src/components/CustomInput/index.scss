@@ -1,6 +1,12 @@
 @import '../../variables.scss';
 
 input {
-  @include input-general;
-  margin: 8px;
+  border: 2px solid $color-primary1;
+  border-radius: $borderRadiusMain;
+  color: $color-primary1;;
+  height: 24px;
+  padding: 6px 48px;
+  text-overflow: ellipsis;
+  font-size: $fontSizeM;
+  margin: 8px 0;
 }
