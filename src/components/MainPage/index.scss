@@ -1,3 +1,21 @@
+@import "../../variables.scss";
+
 .main-page {
   padding: 24px;
+}
+
+.main-page__error {
+  display: flex;
+  justify-content: center;
+  color: $color-primary2;
+  font-size: $fontSizeL;
+  margin: 36px;
+}
+
+.main-page__loading {
+  display: flex;
+  justify-content: center;
+  color: $color-primary1;
+  font-size: $fontSizeL;
+  margin: 36px;
 }

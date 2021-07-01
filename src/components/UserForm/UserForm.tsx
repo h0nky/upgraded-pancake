@@ -2,21 +2,17 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import { FC, ReactElement } from "react";
 import CustomInput from "../CustomInput";
 import { validateEmail } from "../../utils/utils";
-import useTalentInterest from "../../hooks/useTalentInterest";
-import { IModalContent, TExtraInfo} from "../../types";
+import { IUserFormProps } from "../../types";
 import { FORM_VALIDATION_ERROR, USER_FORM_TITLE } from "../../constants";
 import './index.scss';
 
 
-const UserForm: FC<{ company: IModalContent | undefined }> = ({ company }): ReactElement => {
+const UserForm: FC<IUserFormProps> = ({ company, onCustomSubmit }): ReactElement => {
   const [userName, setName] = useState<string>('');
   const [userEmail, setEmail] = useState<string>('');
   const [error, setError] = useState<string|boolean>(false);
-  const [extraInfo, setExtraInfo] = useState<TExtraInfo>({ code: 0, type: '', message: '' });
   
-  const postAsyncData = useTalentInterest();
-
-  const onFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // User input check before form submit
@@ -25,9 +21,7 @@ const UserForm: FC<{ company: IModalContent | undefined }> = ({ company }): Reac
       return;
     }
 
-    const response = await postAsyncData(company, userName, userEmail);
-    
-    setExtraInfo(response);
+    onCustomSubmit({ company, userName, userEmail });
     setError(false);
   };
   

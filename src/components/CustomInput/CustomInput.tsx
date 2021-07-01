@@ -1,12 +1,6 @@
 import { FC, ReactElement } from "react";
+import { ICustomInputProps } from "../../types";
 import './index.scss';
-
-interface ICustomInputProps {
-  type: string,
-  value: string,
-  placeholder: string,
-  onHandleChange: any
-};
 
 const CustomInput: FC<ICustomInputProps> = ({
   type,

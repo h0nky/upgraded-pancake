@@ -31,16 +31,10 @@ export interface ICompaniesListItemProps {
   handleClick: (id?: any) => void
 };
 
-// TODO: change undefined
-export interface IModalContent {
-  description?: string,
-  developer?: number,
-  found_date?: number,
-  headquarter?: string,
-  name?: string,
-  technologies?: string,
-  tm_rating?: number,
-  id?: number,
+export interface IModalContentProps {
+  company: TCompany | undefined,
+  additionalInfo: TExtraInfo | null,
+  children: ReactElement
 };
 
 export type TExtraInfo = {
@@ -52,4 +46,22 @@ export type TExtraInfo = {
 export interface ICompaniesListProps {
   companies: TCompany[],
   handleClick: (id: number) => void
+};
+
+export type TRequest = {
+  company: TCompany | undefined,
+  userName: string,
+  userEmail: string,
+};
+
+export interface IUserFormProps {
+  company: TCompany | undefined,
+  onCustomSubmit: (data: TRequest) => void 
+};
+
+export interface ICustomInputProps {
+  type: string,
+  value: string,
+  placeholder: string,
+  onHandleChange: any
 };

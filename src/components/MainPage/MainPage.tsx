@@ -5,16 +5,20 @@ import ModalContent from "../ModalContent";
 import CustomInput from "../CustomInput";
 import UserForm from "../UserForm";
 
+import useTalentInterest from "../../hooks/useTalentInterest";
 import { useGet } from "restful-react";
-import { IModalContent, TCompany } from "../../types";
-import { LOADING_TEXT } from "../../constants";
+import { TCompany, TRequest, TExtraInfo } from "../../types";
+import { LOADING_TEXT, ERROR_TEXT } from "../../constants";
 import './index.scss';
 
 
 const MainPage: FC = (): ReactElement => {
   const [modalState, setModalState] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
-  const [selectedCompany, setSelectedCompany] = useState<IModalContent>();
+  const [selectedCompany, setSelectedCompany] = useState<TCompany|undefined>();
+  const [additionalInfo, setAdditionalInfo] = useState<TExtraInfo|null>(null);
+
+  const postAsyncData = useTalentInterest();
 
   const { data, loading, error } = useGet({ path: '/companies' });
 
@@ -33,27 +37,34 @@ const MainPage: FC = (): ReactElement => {
     return filtered;
   },[data, searchValue]);
 
-  if (error) return <p className="main-page__loading">{LOADING_TEXT}</p> // TODO HANDLE ERROR
-  if (loading) return <p className="main-page__loading">{LOADING_TEXT}</p>
+  const onFormSubmit = async (data: TRequest) => {
+    const response = await postAsyncData({ ...data });
+    setAdditionalInfo(response);
+  };
+
+  if (error) return <span className="main-page__error">{ERROR_TEXT}</span>
 
   return (
     <div className="main-page">
-      <CustomInput
-        type="text"
-        value={searchValue}
-        placeholder="Search"
-        onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setSearchValue(e.target.value)}
-      />
-      <CompaniesList
-        companies={filterCompanies}
-        handleClick={toggleModalWindow}
-      />
-      {modalState && (
-        <ModalWindow onClose={toggleModalWindow}>
-          <ModalContent {...selectedCompany}>
-            <UserForm company={selectedCompany} />
-          </ModalContent>
-        </ModalWindow>)}
+      {loading ? <span className="main-page__loading">{LOADING_TEXT}</span> : (
+      <>
+        <CustomInput
+          type="text"
+          value={searchValue}
+          placeholder="Search"
+          onHandleChange={(e: ChangeEvent<HTMLFormElement>) => setSearchValue(e.target.value)}
+        />
+        <CompaniesList
+          companies={filterCompanies}
+          handleClick={toggleModalWindow}
+        />
+        {modalState && (
+          <ModalWindow onClose={toggleModalWindow}>
+            <ModalContent company={selectedCompany} additionalInfo={additionalInfo}>
+              <UserForm company={selectedCompany} onCustomSubmit={onFormSubmit} />
+            </ModalContent>
+          </ModalWindow>)}
+      </>)}
     </div>
   );
 }

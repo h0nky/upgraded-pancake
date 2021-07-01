@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
 import MainPage from "../MainPage";
-import { TMLogo } from "../../logo";
+import { TMLogo } from "../TMLogo";
 import './index.scss';
 
 const App: FC = (): ReactElement => (
